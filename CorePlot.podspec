@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
   s.description = 'Core Plot is a plotting framework for OS X and iOS. It provides 2D visualization ' \
                   'of data, and is tightly integrated with Apple technologies like Core Animation, ' \
                   'Core Data, and Cocoa Bindings.'
+  s.requires_arc = true
 
   s.ios.deployment_target = '3.1.3'
   s.osx.deployment_target = '10.5'
@@ -24,7 +25,7 @@ Pod::Spec.new do |s|
   s.osx.source_files = 'framework/CorePlot.h', 'framework/MacOnly/*.{h,m}'
 
   s.frameworks   = 'QuartzCore', 'Accelerate'
-  
+  s.prefix_header_contents = '#import <Accelerate/Accelerate.h>'
   s.prepare_command = <<-CMD
     dtrace -h -s framework/TestResources/CorePlotProbes.d -o framework/Source/CorePlotProbes.h
   CMD
